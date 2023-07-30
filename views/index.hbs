@@ -1,0 +1,117 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="icon" type="image/x-icon" href="../images/weather.svg" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+  </head>
+  <body>
+    <div id="header">
+      <img src="images/weather.svg" alt="weather_icon" />
+      <h1>Weather App</h1>
+    </div>
+    <div class="box">
+      <form method="get" action="/" id="search">
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value=""
+          placeholder="Enter City"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="submit">Search</button>
+      </form>
+      <div class="details">
+        <section id="weather_details">
+          <img src={{src}} alt="icon" id="icon" />
+          <h2 id="weather">{{tempstatus}}</h2>
+          <h2 class="city">
+            <i
+              id="weather_icon"
+              class="fa-sharp fa-solid fa-location-dot"
+              style="color: #ffffff"
+            ></i>
+            <span id="location">{{city}},{{country}}</span>
+          </h2>
+          <div id="temp">
+            <h2>{{temp}} &deg;C</h2>
+          </div>
+          <div id="tempmin_max">
+            <img src="images/thermometer-warmer.svg" alt="max_temp" /><span>Max
+              {{tempmax}}&deg;C</span>
+            <img src="images/thermometer-colder.svg" alt="max_temp" /><span>Min
+              {{tempmin}}&deg;C</span>
+          </div>
+
+          <div>
+            <h3 id="date">
+              Saturday, 29 JULY 2023<br /><span id="time"> 12:32 PM</span>
+            </h3>
+          </div>
+        </section>
+        <section id="info">
+          <div id="sunrise">
+            <img src="images/sunrise.svg" alt="sunrise" />
+            <div class="value">
+              <p>Sunrise</p>
+              <h2>{{riseTime}} AM</h2>
+            </div>
+          </div>
+          <div id="sunset">
+            <img src="images/sunset.svg" alt="sunset" />
+            <div class="value">
+              <p>Sunset</p>
+              <h2>{{setTime}} PM</h2>
+            </div>
+          </div>
+          <div id="humidity">
+            <img src="images/humidity.svg" alt="humidity" />
+            <div class="value">
+              <p>Humidity</p>
+              <h2>{{humidity}}%</h2>
+            </div>
+          </div>
+          <div id="pressure">
+            <img src="images/barometer.svg" alt="pressure" />
+            <div class="value">
+              <p>Air Pressure</p>
+              <h2>{{pressure}} Pa</h2>
+            </div>
+          </div>
+          <div id="wind">
+            <img src="images/wind.svg" alt="wind" />
+            <div class="value">
+              <p>Wind Speed</p>
+              <h2>{{speed}} km/h</h2>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const getCurrTime = () => { const getTime = new Date(); let hours =
+      getTime.getHours(); let min = getTime.getMinutes(); let period = "AM"; if
+      (hours > 11) { period = "PM"; if (hours > 12) { hours = hours - 12; } } if
+      (min < 10) { min = "0" + min; } return `${hours}:${min} ${period}`; };
+      const getCurrDate = () => { const date = new Date(); const days = [
+      "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+      "Saturday", ]; const month = [ "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+      "JUL", "AUG", "SEP", "OCT", "NOV", "DEC", ]; let day =
+      days[date.getDay()]; let curDate = date.getDate(); let mon =
+      month[date.getMonth()]; let year = date.getFullYear(); return `${day},
+      ${curDate} ${mon} ${year}`; }; const updateTime = () => {
+      document.getElementById( "date" ).innerHTML = `${getCurrDate()} <br> <span
+      id="time"> ${getCurrTime()}</span>`; }; setInterval(updateTime, 1000);
+    </script>
+  </body>
+</html>
